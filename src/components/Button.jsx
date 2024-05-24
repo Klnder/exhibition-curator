@@ -13,7 +13,7 @@ function Button({ artwork }) {
 
   function removeFromGallery() {
     const updatedUser = { ...user };
-    const index = updatedUser.mygallery.indexOf(artwork);
+    const index = updatedUser.mygallery.findIndex((item) => item.name === artwork.name);
     if (index !== -1) {
       updatedUser.mygallery.splice(index, 1);
     }
@@ -21,10 +21,8 @@ function Button({ artwork }) {
   }
 
   useEffect(() => {
-    setInGallery(false);
-    if (user.mygallery.includes(artwork)) {
-      setInGallery(true);
-    }
+    const isInGallery = user.mygallery.some((item) => item.name === artwork.name);
+    setInGallery(isInGallery);
   }, [user]);
 
   if (inGallery) {

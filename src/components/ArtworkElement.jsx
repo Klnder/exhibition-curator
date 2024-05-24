@@ -8,7 +8,7 @@ function ArtworkElement({ artwork }) {
         <img src={artwork.imgLink} alt="Shoes" />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">{artwork.title}</h2>
+        <h2 className="card-title">{artwork.name}</h2>
         <p>{artwork.body}</p>
         <div className="card-actions justify-end">
           <Button artwork={artwork} />
