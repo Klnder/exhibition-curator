@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ArtworkElement from "../components/ArtworkElement";
 import SearchBar from "../components/SearchBar";
 import Modal from "../components/Modal";
+
 
 function HomePage() {
   const [gallery, setGallery] = useState([
@@ -52,8 +53,11 @@ function HomePage() {
 
   return (
     <div className="w-4/5 mx-auto h-full bg-base-200 rounded-lg p-2 overflow-y-auto min-w-[700px] flex-col">
-      <SearchBar setFilteredArtworks={setFilteredArtworks} gallery={gallery} />
-      <form action="" className="my-3 w-full flex justify-center self-baseline">
+      <div className="flex">
+        <SearchBar setFilteredArtworks={setFilteredArtworks} gallery={gallery} />
+      </div>
+
+      <form className="my-3 w-full flex justify-center self-baseline">
         <label htmlFor="sortBy" className="mr-3">
           Sort By:
         </label>
@@ -62,6 +66,7 @@ function HomePage() {
           <option value="descendant">Alphabetical Z-A</option>
         </select>
       </form>
+
       <div className="flex flex-wrap">
         {filteredArtworks.map((artwork, index) => (
           <ArtworkElement artwork={artwork} setArtworkClick={setArtworkClick} key={index} />

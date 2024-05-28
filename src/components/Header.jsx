@@ -9,14 +9,6 @@ function Header() {
           Exhibition Creator
         </Link>
       </div>
-      <div className="flex flex-shrink justify-center w-full">
-        <Link to="/home" className="btn btn-ghost text-md bg-base-300 mr-4">
-          Home
-        </Link>
-        <Link to="/mygallerie" className="btn btn-ghost text-md bg-base-300">
-          My gallery
-        </Link>
-      </div>
     </header>
   );
 }
