@@ -6,7 +6,7 @@ function ArtworkElement({ artwork, setArtworkClick }) {
     setArtworkClick(artwork);
   }
   return (
-    <div className="card card-compact w-72 bg-base-100 m-3 hover:scale-105 hover:shadow-md hover:shadow-secondary hover:cursor-pointer ">
+    <div className="card card-compact min-w-[250px] w-1/4 bg-base-100 m-3 hover:scale-105 hover:shadow-md hover:shadow-secondary hover:cursor-pointer ">
       <div onClick={handleClick}>
         <figure className="rounded-md">
           <img src={artwork.imgLink} alt="Shoes" />

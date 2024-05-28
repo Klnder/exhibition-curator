@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/User";
 
 function Button({ artwork }) {
@@ -21,7 +21,7 @@ function Button({ artwork }) {
   }
 
   useEffect(() => {
-    const isInGallery = user.mygallery.some((item) => item.name === artwork.name);
+    const isInGallery = user.mygallery.find((item) => item.name === artwork.name);
     setInGallery(isInGallery);
   }, [user]);
 

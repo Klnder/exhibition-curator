@@ -1,31 +1,21 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/User";
 
-function SearchBar({ setFilteredArtworks, gallery }) {
+function SearchBar({ setGallery }) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [isChecked, setIsChecked] = useState(false);
   const { user } = useContext(UserContext);
 
   function handleSearchChange(event) {
     setSearchQuery(event.target.value);
     if (event.target.value === "") {
-      setFilteredArtworks(gallery);
+      setGallery(user.gallery);
     } else {
-      setFilteredArtworks(filterArtworks(event.target.value));
+      setGallery(filterArtworks(event.target.value));
     }
   }
   function filterArtworks(query) {
-    return gallery.filter((artwork) => artwork.name.toLowerCase().includes(query.toLowerCase()));
+    return user.gallery.filter((artwork) => artwork.name.toLowerCase().includes(query.toLowerCase()));
   }
-
-  const handleCheckboxChange = (event) => {
-    setIsChecked(event.target.checked);
-    if (event.target.checked) {
-      setFilteredArtworks(user.mygallery);
-    } else {
-      setFilteredArtworks(gallery);
-    }
-  };
 
   return (
     <div className="w-full mx-auto flex justify-center items-center relative">
@@ -37,12 +27,6 @@ function SearchBar({ setFilteredArtworks, gallery }) {
           onChange={handleSearchChange}
           value={searchQuery}
         />
-      </div>
-      <div className="absolute right-0 w-36">
-        <label className="cursor-pointer label">
-          <span className="label-text">My gallerie</span>
-          <input type="checkbox" className="toggle toggle-primary" checked={isChecked} onChange={handleCheckboxChange} />
-        </label>
       </div>
     </div>
   );
