@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage";
 import MygalleryPage from "./pages/MygalleryPage";
 import ErrorPage from "./pages/ErrorPage";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/*" element={<ErrorPage />} />
         </Routes>
       </main>
+      <Footer />
     </>
   );
 }

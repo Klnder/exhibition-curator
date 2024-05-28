@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ArtworkElement from "../components/ArtworkElement";
 import SearchBar from "../components/SearchBar";
+import Modal from "../components/Modal";
 
 function HomePage() {
   const [gallery, setGallery] = useState([
@@ -23,6 +24,7 @@ function HomePage() {
   const [filteredArtworks, setFilteredArtworks] = useState(gallery);
   const [sortBy, setSortBy] = useState("ascendant");
   //searchParams.get("sortBy") ||
+  const [artworkClick, setArtworkClick] = useState("");
 
   useEffect(() => {
     const gallerySorted = gallery;
@@ -41,6 +43,12 @@ function HomePage() {
     }
     setGallery(gallerySorted);
   }, [sortBy]);
+  useEffect(() => {
+    if (artworkClick !== "") {
+      const modal = document.getElementById("artwork_modal");
+      modal?.showModal();
+    }
+  }, [artworkClick]);
 
   return (
     <div className="w-4/5 mx-auto h-full bg-base-200 rounded-lg p-2 overflow-y-auto min-w-[700px] flex-col">
@@ -55,10 +63,11 @@ function HomePage() {
         </select>
       </form>
       <div className="flex flex-wrap">
-        {filteredArtworks.map((artwork) => (
-          <ArtworkElement artwork={artwork} />
+        {filteredArtworks.map((artwork, index) => (
+          <ArtworkElement artwork={artwork} setArtworkClick={setArtworkClick} key={index} />
         ))}
       </div>
+      <Modal artwork={artworkClick} setArtworkClick={setArtworkClick} />
     </div>
   );
 }
