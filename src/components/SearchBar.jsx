@@ -1,8 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/User";
 
 function SearchBar({ setFilteredArtworks, gallery }) {
   const [searchQuery, setSearchQuery] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
+  const { user } = useContext(UserContext);
 
   function handleSearchChange(event) {
     setSearchQuery(event.target.value);
@@ -15,8 +17,6 @@ function SearchBar({ setFilteredArtworks, gallery }) {
   function filterArtworks(query) {
     return gallery.filter((artwork) => artwork.name.toLowerCase().includes(query.toLowerCase()));
   }
-  const [isChecked, setIsChecked] = useState(false);
-  const { user } = useContext(UserContext);
 
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);

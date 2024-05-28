@@ -53,9 +53,7 @@ function HomePage() {
 
   return (
     <div className="w-4/5 mx-auto h-full bg-base-200 rounded-lg p-2 overflow-y-auto min-w-[700px] flex-col">
-      <div className="flex">
         <SearchBar setFilteredArtworks={setFilteredArtworks} gallery={gallery} />
-      </div>
 
       <form className="my-3 w-full flex justify-center self-baseline">
         <label htmlFor="sortBy" className="mr-3">
