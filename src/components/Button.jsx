@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/User";
+import { toast } from "react-toastify";
 
 function Button({ artwork }) {
   const { user, setUser } = useContext(UserContext);
@@ -9,19 +10,21 @@ function Button({ artwork }) {
     const updatedUser = { ...user };
     updatedUser.mygallery.push(artwork);
     setUser(updatedUser);
+    toast.success("added to your gallerie !");
   }
 
   function removeFromGallery() {
     const updatedUser = { ...user };
-    const index = updatedUser.mygallery.findIndex((item) => item.name === artwork.name);
+    const index = updatedUser.mygallery.findIndex((item) => item.title === artwork.title);
     if (index !== -1) {
       updatedUser.mygallery.splice(index, 1);
     }
     setUser(updatedUser);
+    toast.error("remove from your gallerie !");
   }
 
   useEffect(() => {
-    const isInGallery = user.mygallery.find((item) => item.name === artwork.name);
+    const isInGallery = user.mygallery.find((item) => item.title === artwork.title);
     setInGallery(isInGallery);
   }, [user]);
 

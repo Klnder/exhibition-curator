@@ -82,7 +82,7 @@ function HomePage() {
         </form>
       </div>
 
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap justify-center">
         {gallery.map((artwork) => (
           <ArtworkElement artwork={artwork} setArtworkClick={setArtworkClick} key={artwork.id} />
         ))}
