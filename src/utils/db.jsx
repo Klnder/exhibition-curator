@@ -9,7 +9,6 @@ export async function getArtworks() {
     };
 
     const response = await axios.get("https://openaccess-api.clevelandart.org/api/artworks", config);
-
     return response.data;
   } catch (error) {
     throw error;
