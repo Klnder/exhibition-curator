@@ -6,7 +6,7 @@ import { UserContext } from "../context/User";
 import { getArtworks } from "../utils/db";
 
 function HomePage() {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [gallery, setGallery] = useState(user.gallery);
   const [sortBy, setSortBy] = useState("ascendant");
   //searchParams.get("sortBy") ||
@@ -17,14 +17,14 @@ function HomePage() {
     const gallerySorted = [...gallery];
     if (sortBy === "ascendant") {
       gallerySorted.sort((a, b) => {
-        if (a.name < b.name) return -1;
-        if (a.name > b.name) return 1;
+        if (a.title < b.title) return -1;
+        if (a.title > b.title) return 1;
         return 0;
       });
     } else {
       gallerySorted.sort((a, b) => {
-        if (a.name < b.name) return 1;
-        if (a.name > b.name) return -1;
+        if (a.title < b.title) return 1;
+        if (a.title > b.title) return -1;
         return 0;
       });
     }
@@ -42,8 +42,10 @@ function HomePage() {
     const fetchData = async () => {
       try {
         const data = await getArtworks();
-
-        console.log(data);
+        const updatedUser = { ...user };
+        updatedUser.gallery = data.data;
+        setUser(updatedUser);
+        setGallery(updatedUser.gallery);
       } catch (error) {}
     };
 

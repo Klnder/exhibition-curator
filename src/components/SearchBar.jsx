@@ -14,7 +14,7 @@ function SearchBar({ setGallery }) {
     }
   }
   function filterArtworks(query) {
-    return user.gallery.filter((artwork) => artwork.name.toLowerCase().includes(query.toLowerCase()));
+    return user.gallery.filter((artwork) => artwork.title.toLowerCase().includes(query.toLowerCase()));
   }
 
   return (
