@@ -3,9 +3,6 @@ import axios from "axios";
 export async function getArtworks() {
   try {
     const config = {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
       params: {
         fields: "id",
       },
