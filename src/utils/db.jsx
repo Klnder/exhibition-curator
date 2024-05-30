@@ -7,7 +7,7 @@ export async function getArtworks() {
         "Access-Control-Allow-Origin": "*",
       },
       params: {
-        fields: "id,current_location,title,creation_date,collection,type,description,url,images",
+        fields: "id",
       },
     };
 
