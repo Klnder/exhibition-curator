@@ -3,6 +3,7 @@ import ArtworkElement from "../components/ArtworkElement";
 import SearchBar from "../components/SearchBar";
 import Modal from "../components/Modal";
 import { UserContext } from "../context/User";
+import { getArtworks } from "../utils/db";
 
 function HomePage() {
   const { user } = useContext(UserContext);
@@ -36,6 +37,18 @@ function HomePage() {
       modal?.showModal();
     }
   }, [artworkClick]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getArtworks();
+
+        console.log(data);
+      } catch (error) {}
+    };
+
+    fetchData();
+  }, []);
 
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
