@@ -4,8 +4,10 @@ const apiCleveland = axios.create({ baseURL: "https://openaccess-api.clevelandar
 
 export async function getArtworks() {
   try {
-    const response = await apiCleveland.get("/artworks/?has_image=1&fields=id,title,current_location,creation_date,collection,type,url,images");
-    return response.data;
+    const { data } = await apiCleveland.get(
+      "/artworks/?has_image=1&fields=id,title,current_location,creation_date,collection,type,url,images,tombstone"
+    );
+    return data.data;
   } catch (error) {
     throw error;
   }

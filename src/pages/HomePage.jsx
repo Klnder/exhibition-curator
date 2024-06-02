@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import ReactLoading from "react-loading";
 import ArtworkElement from "../components/ArtworkElement";
 import SearchBar from "../components/SearchBar";
 import Modal from "../components/Modal";
@@ -14,14 +15,16 @@ function HomePage() {
   //searchParams.get("sortBy") ||
   const [artworkClick, setArtworkClick] = useState("");
   const [isChecked, setIsChecked] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   async function fetchData() {
     try {
       const data = await getArtworks();
-      const updatedUser = { ...user, gallery: data.data };
+      const updatedUser = { ...user, gallery: data };
       setUser(updatedUser);
       const galleryFilter = filterGallery(filters, updatedUser);
       setGallery(galleryFilter);
+      setIsLoading(false);
     } catch (error) {
       console.error("Error fetching artworks:", error);
     }
@@ -73,11 +76,20 @@ function HomePage() {
         </form>
       </div>
 
-      <div className="flex flex-wrap justify-center">
-        {gallery.map((artwork) => (
-          <ArtworkElement artwork={artwork} setArtworkClick={setArtworkClick} key={artwork.id} />
-        ))}
-      </div>
+      {isLoading && (
+        <div className="flex flex-col items-center">
+          <ReactLoading type="spin" color="#fff" height={"25%"} width={"25%"} className="p-5" />
+          <h1>Data are loading, please wait !</h1>
+        </div>
+      )}
+
+      {!isLoading && (
+        <div className="flex flex-wrap justify-center">
+          {gallery.map((artwork) => (
+            <ArtworkElement artwork={artwork} setArtworkClick={setArtworkClick} key={artwork.id} />
+          ))}
+        </div>
+      )}
       <Modal artwork={artworkClick} setArtworkClick={setArtworkClick} />
     </div>
   );

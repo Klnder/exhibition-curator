@@ -12,11 +12,11 @@ function ArtworkElement({ artwork, setArtworkClick }) {
           <img src={artwork.images.web.url} alt="Shoes" className="w-48 h-48" />
         </figure>
         <div className="card-body">
-          <h2 className="card-title ">{artwork.title}</h2>
-          <p>{artwork.collection}</p>
+          <h2 className="card-title text-md">{artwork.title}</h2>
         </div>
       </div>
-      <div className="card-actions justify-end mt-auto">
+      <div className="card-actions justify-between items-baseline mt-auto">
+        <div className="badge badge-primary badge-outline ml-2">{artwork.type}</div>
         <Button artwork={artwork} />
       </div>
     </div>
