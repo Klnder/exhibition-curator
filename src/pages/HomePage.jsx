@@ -52,46 +52,48 @@ function HomePage() {
   }, [filters]);
 
   return (
-    <div className="w-4/5 mx-auto h-full bg-base-200 rounded-lg p-2 overflow-y-auto min-w-[700px] flex-col">
-      <div className="flex-col relative">
-        <SearchBar />
-        <div className="w-36 absolute top-0 right-0">
-          <label className="cursor-pointer label">
-            <span className="label-text">My gallerie</span>
-            <input type="checkbox" className="toggle toggle-primary" checked={isChecked} onChange={handleCheckboxChange} />
-          </label>
+    <>
+      <div className="w-4/5 mx-auto h-full bg-base-200 rounded-lg p-2 overflow-y-auto min-w-[700px] flex-col">
+        <div className="flex-col relative">
+          <SearchBar />
+          <div className="w-36 absolute top-0 right-0">
+            <label className="cursor-pointer label">
+              <span className="label-text">My gallerie</span>
+              <input type="checkbox" className="toggle toggle-primary" checked={isChecked} onChange={handleCheckboxChange} />
+            </label>
+          </div>
+          <form className="my-3 w-full flex justify-center self-baseline">
+            <label htmlFor="sortBy" className="mr-3">
+              Sort By:
+            </label>
+            <select
+              name="sortBy"
+              className="select select-bordered select-sm w-full max-w-xs"
+              onChange={(e) => setFilters({ ...filters, sortBy: e.target.value })}
+            >
+              <option value="ascendant">Alphabetical A-Z</option>
+              <option value="descendant">Alphabetical Z-A</option>
+            </select>
+          </form>
         </div>
-        <form className="my-3 w-full flex justify-center self-baseline">
-          <label htmlFor="sortBy" className="mr-3">
-            Sort By:
-          </label>
-          <select
-            name="sortBy"
-            className="select select-bordered select-sm w-full max-w-xs"
-            onChange={(e) => setFilters({ ...filters, sortBy: e.target.value })}
-          >
-            <option value="ascendant">Alphabetical A-Z</option>
-            <option value="descendant">Alphabetical Z-A</option>
-          </select>
-        </form>
+
+        {isLoading && (
+          <div className="flex flex-col items-center">
+            <ReactLoading type="spin" color="#fff" height={"25%"} width={"25%"} className="p-5" />
+            <h1>Data are loading, please wait !</h1>
+          </div>
+        )}
+
+        {!isLoading && (
+          <div className="flex flex-wrap justify-center">
+            {gallery.map((artwork) => (
+              <ArtworkElement artwork={artwork} setArtworkClick={setArtworkClick} key={artwork.id} />
+            ))}
+          </div>
+        )}
       </div>
-
-      {isLoading && (
-        <div className="flex flex-col items-center">
-          <ReactLoading type="spin" color="#fff" height={"25%"} width={"25%"} className="p-5" />
-          <h1>Data are loading, please wait !</h1>
-        </div>
-      )}
-
-      {!isLoading && (
-        <div className="flex flex-wrap justify-center">
-          {gallery.map((artwork) => (
-            <ArtworkElement artwork={artwork} setArtworkClick={setArtworkClick} key={artwork.id} />
-          ))}
-        </div>
-      )}
       <Modal artwork={artworkClick} setArtworkClick={setArtworkClick} />
-    </div>
+    </>
   );
 }
 
