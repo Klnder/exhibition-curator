@@ -4,7 +4,7 @@ import ArtworkElement from "../components/ArtworkElement";
 import SearchBar from "../components/SearchBar";
 import Modal from "../components/Modal";
 import { UserContext } from "../context/User";
-import { getArtworks } from "../utils/db";
+import { getArtworksArtInstituteOfChicago, getArtworksCleveland } from "../utils/db";
 import { FilterContext } from "../context/Filter";
 import { filterGallery } from "../utils/utils";
 
@@ -19,8 +19,9 @@ function HomePage() {
 
   async function fetchData() {
     try {
-      const data = await getArtworks();
-      const updatedUser = { ...user, gallery: data };
+      const dataCleveland = await getArtworksCleveland();
+      const dataChicago = await getArtworksArtInstituteOfChicago();
+      const updatedUser = { ...user, galleryCleveland: dataCleveland, galleryChicago: dataChicago };
       setUser(updatedUser);
       const galleryFilter = filterGallery(filters, updatedUser);
       setGallery(galleryFilter);

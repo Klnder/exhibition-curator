@@ -1,6 +1,9 @@
 import React from "react";
 
 function Modal({ artwork, setArtworkClick }) {
+  const location = artwork.current_location;
+  const displayLocation = location && location.trim() !== "" ? location : "not available at the moment";
+
   return (
     <dialog id="artwork_modal" className="modal">
       <div className="modal-box w-10/12 max-w-5xl">
@@ -11,7 +14,7 @@ function Modal({ artwork, setArtworkClick }) {
         </form>
         <div className="flex ">
           <div className="flex justify-center items-center flex-1">
-            <img src={artwork.images?.web.url} alt="Image" className="w-4/5 rounded-md h-auto" />
+            <img src={artwork.image} alt="Image" className="w-4/5 rounded-md h-auto" />
           </div>
           <div className="flex flex-col justify-start items-start flex-1 p-2">
             <p>
@@ -24,10 +27,7 @@ function Modal({ artwork, setArtworkClick }) {
               <span className="font-bold underline">Creation date:</span> <span className="italic text-sm">{artwork.creation_date}</span>
             </p>
             <p>
-              <span className="font-bold underline">Collection:</span> <span className="italic text-sm">{artwork.collection}</span>
-            </p>
-            <p>
-              <span className="font-bold underline">Available at:</span> <span className="italic text-sm">{artwork.current_location}</span>
+              <span className="font-bold underline">Available at:</span> <span className="italic text-sm">{displayLocation}</span>
             </p>
             <p>
               <span className="font-bold underline">Link:</span>{" "}
@@ -39,7 +39,7 @@ function Modal({ artwork, setArtworkClick }) {
         </div>
       </div>
       <form method="dialog" className="modal-backdrop">
-        <button>close</button>
+        <button onClick={() => setArtworkClick("")}>close</button>
       </form>
     </dialog>
   );

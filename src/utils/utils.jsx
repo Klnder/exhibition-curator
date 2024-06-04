@@ -4,7 +4,7 @@ export function filterGallery(filters, user) {
   if (filters.mygallery === true) {
     galleryFilter = [...user.mygallery];
   } else {
-    galleryFilter = [...user.gallery];
+    galleryFilter = [...user.galleryCleveland, ...user.galleryChicago];
   }
 
   if (filters.sortBy === "ascendant") {

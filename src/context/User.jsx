@@ -4,7 +4,8 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({
-    gallery: [],
+    galleryCleveland: [],
+    galleryChicago: [],
     mygallery: [],
   });
 
