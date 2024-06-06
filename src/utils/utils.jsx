@@ -3,8 +3,12 @@ export function filterGallery(filters, user) {
 
   if (filters.mygallery === true) {
     galleryFilter = [...user.mygallery];
-  } else {
+  } else if (filters.from === "All") {
     galleryFilter = [...user.galleryCleveland, ...user.galleryChicago];
+  } else if (filters.from === "Cleveland") {
+    galleryFilter = [...user.galleryCleveland];
+  } else if (filters.from === "Chicago") {
+    galleryFilter = [...user.galleryChicago];
   }
 
   if (filters.sortBy === "ascendant") {

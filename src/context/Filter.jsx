@@ -7,6 +7,7 @@ export const FilterProvider = ({ children }) => {
     mygallery: false,
     sortBy: "ascendant",
     search: "",
+    from: "All",
   });
 
   return <FilterContext.Provider value={{ filters, setFilters }}>{children}</FilterContext.Provider>;

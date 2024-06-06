@@ -22,14 +22,25 @@ export async function getArtworksArtInstituteOfChicago() {
     const { data } = await apiChicago.get(
       "/artworks?fields=id,title,thumbnail,artwork_type_title,artist_title,image_id,date_end,on_loan_display&limit=100"
     );
-    const transformedData = data.data.map((item) => ({
-      ...item,
-      image: `https://www.artic.edu/iiif/2/${item.image_id}/full/200,/0/default.jpg`,
-      tombstone: item.thumbnail?.alt_text,
-      current_location: item.on_loan_display,
-      creation_date: item.date_end,
-      type: item.artwork_type_title,
-    }));
+
+    const transformedData = data.data
+      .filter((item) => item.image_id !== null)
+      .map((item) => {
+        const removeHtmlTags = (html) => {
+          return html ? html.replace(/<\/?p>|<\/?i>/g, "") : "";
+        };
+
+        return {
+          artist: item.artist_title,
+          id: item.id,
+          title: item.title,
+          image: `https://www.artic.edu/iiif/2/${item.image_id}/full/200,/0/default.jpg`,
+          tombstone: item.thumbnail?.alt_text,
+          current_location: removeHtmlTags(item.on_loan_display),
+          creation_date: item.date_end,
+          type: item.artwork_type_title,
+        };
+      });
     return transformedData;
   } catch (error) {
     throw error;
