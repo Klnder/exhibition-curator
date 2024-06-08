@@ -15,8 +15,8 @@ function ArtworkElement({ artwork, setArtworkClick }) {
           <h2 className="card-title text-md">{artwork.title.length > 40 ? `${artwork.title.slice(0, 40)}...` : artwork.title}</h2>
         </div>
       </div>
-      <div className="card-actions justify-between items-baseline mt-auto">
-        <div className="badge badge-primary badge-outline ml-2">{artwork.type}</div>
+      <div className="card-actions justify-between items-baseline mt-auto flex-nowrap">
+        <div className="badge badge-primary badge-outline ml-2 max-w-1/2 overflow-hidden text-ellipsis whitespace-nowrap">{artwork.type}</div>
         <Button artwork={artwork} />
       </div>
     </div>

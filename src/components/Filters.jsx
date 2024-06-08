@@ -1,15 +1,32 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import SearchBar from "../components/SearchBar";
 import { FilterContext } from "../context/Filter";
+import { UserContext } from "../context/User";
+import { toast } from "react-toastify";
 
 function Filters() {
-  const [isChecked, setIsChecked] = useState(false);
   const { filters, setFilters } = useContext(FilterContext);
+  const { setUser } = useContext(UserContext);
 
-  function handleCheckboxChange(event) {
-    const isChecked = event.target.checked;
-    setIsChecked(isChecked);
-    setFilters({ ...filters, mygallery: isChecked });
+  function handleYesClick() {
+    setFilters({
+      mygallery: false,
+      sortBy: "ascendant",
+      search: "",
+      from: "All",
+    });
+
+    setUser((prevUser) => ({
+      ...prevUser,
+      mygallery: [],
+    }));
+
+    document.getElementById("reset_modal").close();
+    toast.success("Filters and gallery reset !");
+  }
+
+  function handleNoClick() {
+    document.getElementById("reset_modal").close();
   }
 
   return (
@@ -18,8 +35,21 @@ function Filters() {
       <div className="w-36 absolute top-0 right-0">
         <label className="cursor-pointer label">
           <span className="label-text">My gallerie</span>
-          <input type="checkbox" className="toggle toggle-primary" checked={isChecked} onChange={handleCheckboxChange} />
+          <input
+            type="checkbox"
+            className="toggle toggle-primary"
+            checked={filters.mygallery}
+            onChange={(event) =>
+              setFilters((prevFilters) => ({
+                ...prevFilters,
+                mygallery: event.target.checked,
+              }))
+            }
+          />
         </label>
+        <button className="btn btn-active btn-primary w-36 mt-4" onClick={() => document.getElementById("reset_modal").showModal()}>
+          Reset All
+        </button>
       </div>
       <div className="w-full flex justify-center">
         <div className="w-full max-w-xs">
@@ -54,6 +84,22 @@ function Filters() {
           </form>
         </div>
       </div>
+      <dialog id="reset_modal" className="modal">
+        <div className="modal-box">
+          <form method="dialog">
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+          </form>
+          <h3 className="font-bold text-lg">Are you sure you want to reset all ?</h3>
+          <div className="modal-action justify-center">
+            <button className="btn btn-success mx-2" onClick={handleYesClick}>
+              Yes
+            </button>
+            <button className="btn btn-error mx-2" onClick={handleNoClick}>
+              No
+            </button>
+          </div>
+        </div>
+      </dialog>
     </div>
   );
 }

@@ -22,8 +22,8 @@ function HomePage() {
       const dataCleveland = await getArtworksCleveland();
       const dataChicago = await getArtworksArtInstituteOfChicago();
       const updatedUser = { ...user, galleryCleveland: dataCleveland, galleryChicago: dataChicago };
-      setUser(updatedUser);
       const galleryFilter = filterGallery(filters, updatedUser);
+      setUser(updatedUser);
       setGallery(galleryFilter);
       setIsLoading(false);
     } catch (error) {
@@ -45,7 +45,9 @@ function HomePage() {
   useEffect(() => {
     const galleryFilter = filterGallery(filters, user);
     setGallery(galleryFilter);
-  }, [filters]);
+    localStorage.setItem("user.mygallery", JSON.stringify(user.mygallery));
+    localStorage.setItem("filters", JSON.stringify(filters));
+  }, [filters, user]);
 
   return (
     <>
