@@ -4,7 +4,7 @@ import { FilterContext } from "../context/Filter";
 import { UserContext } from "../context/User";
 import { toast } from "react-toastify";
 
-function Filters() {
+function Filters({ types }) {
   const { filters, setFilters } = useContext(FilterContext);
   const { setUser } = useContext(UserContext);
 
@@ -80,6 +80,24 @@ function Filters() {
               <option value="All">All</option>
               <option value="Cleveland">Cleveland</option>
               <option value="Chicago">Chicago</option>
+            </select>
+          </form>
+          <form className="my-3 flex items-center">
+            <label htmlFor="source" className="mr-3 w-32 text-left whitespace-nowrap">
+              Type:
+            </label>
+            <select
+              name="source"
+              className="select select-bordered select-sm w-full"
+              value={filters.type}
+              onChange={(e) => setFilters({ ...filters, type: e.target.value })}
+            >
+              <option value="All">All</option>
+              {types.map((type, index) => (
+                <option key={index} value={type}>
+                  {type}
+                </option>
+              ))}
             </select>
           </form>
         </div>

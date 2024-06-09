@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 function Header() {
@@ -6,7 +5,7 @@ function Header() {
     <header className="navbar bg-base-300 fixed top-0 w-full z-50 flex-col">
       <div className="flex justify-between items-center w-full">
         <Link to="/home" className="btn btn-ghost text-xl bg-base-300">
-          Exhibition Creator
+          Exhibition Curator
         </Link>
         <label className="swap swap-rotate">
           <input type="checkbox" className="theme-controller" value="winter" />

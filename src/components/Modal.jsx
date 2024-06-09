@@ -1,5 +1,3 @@
-import React from "react";
-
 function Modal({ artwork, setArtworkClick }) {
   const location = artwork.current_location;
   const displayLocation = location && location.trim() !== "" ? location : "not available at the moment";

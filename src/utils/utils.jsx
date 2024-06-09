@@ -11,6 +11,10 @@ export function filterGallery(filters, user) {
     galleryFilter = [...user.galleryChicago];
   }
 
+  if (filters.type !== "All") {
+    galleryFilter = galleryFilter.filter((artwork) => artwork.type.toLowerCase() === filters.type.toLowerCase());
+  }
+
   if (filters.sortBy === "ascendant") {
     galleryFilter.sort((a, b) => {
       if (a.title < b.title) return -1;
@@ -29,4 +33,19 @@ export function filterGallery(filters, user) {
   }
 
   return galleryFilter;
+}
+
+export function getUniqueGalleryTypes(gallery) {
+  const typesLowerCase = [];
+
+  gallery.forEach((item) => {
+    if (item.type) {
+      const lowerCaseType = item.type.toLowerCase();
+      if (!typesLowerCase.includes(lowerCaseType)) {
+        typesLowerCase.push(lowerCaseType);
+      }
+    }
+  });
+
+  return typesLowerCase;
 }

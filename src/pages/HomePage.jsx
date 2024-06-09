@@ -6,24 +6,26 @@ import Modal from "../components/Modal";
 import { UserContext } from "../context/User";
 import { getArtworksArtInstituteOfChicago, getArtworksCleveland } from "../utils/db";
 import { FilterContext } from "../context/Filter";
-import { filterGallery } from "../utils/utils";
+import { filterGallery, getUniqueGalleryTypes } from "../utils/utils";
 import Filters from "../components/Filters";
 
 function HomePage() {
   const { user, setUser } = useContext(UserContext);
   const { filters } = useContext(FilterContext);
   const [gallery, setGallery] = useState(user.gallery);
-  //searchParams.get("sortBy") ||
   const [artworkClick, setArtworkClick] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [types, setTypes] = useState([]);
 
   async function fetchData() {
     try {
       const dataCleveland = await getArtworksCleveland();
       const dataChicago = await getArtworksArtInstituteOfChicago();
       const updatedUser = { ...user, galleryCleveland: dataCleveland, galleryChicago: dataChicago };
-      const galleryFilter = filterGallery(filters, updatedUser);
+      const fullGallery = [...dataCleveland, ...dataChicago];
+      setTypes(getUniqueGalleryTypes(fullGallery));
       setUser(updatedUser);
+      const galleryFilter = filterGallery(filters, updatedUser);
       setGallery(galleryFilter);
       setIsLoading(false);
     } catch (error) {
@@ -52,7 +54,7 @@ function HomePage() {
   return (
     <>
       <div className="w-4/5 mx-auto h-full bg-base-200 rounded-lg p-2 overflow-y-auto min-w-[700px] flex-col">
-        <Filters />
+        <Filters types={types} />
 
         {isLoading && (
           <div className="flex flex-col items-center">

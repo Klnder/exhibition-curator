@@ -1,4 +1,3 @@
-import React from "react";
 import Button from "./Button";
 
 function ArtworkElement({ artwork, setArtworkClick }) {
@@ -6,7 +5,7 @@ function ArtworkElement({ artwork, setArtworkClick }) {
     setArtworkClick(artwork);
   }
   return (
-    <div className="card card-compact min-w-[250px] w-[20%] bg-base-100 m-3 hover:scale-105 hover:shadow-md hover:shadow-secondary hover:cursor-pointer flex flex-col justify-between">
+    <div className="card card-compact min-w-[250px] w-[19%] bg-base-100 m-3 hover:scale-105 hover:shadow-md hover:shadow-secondary hover:cursor-pointer flex flex-col justify-between">
       <div onClick={handleClick} className="flex-grow">
         <figure className="rounded-md">
           <img src={artwork.image} alt={`Image of artwork ${artwork.title}`} className="w-48 h-48 rounded-md object-fill" />

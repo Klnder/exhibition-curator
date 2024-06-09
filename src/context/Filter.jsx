@@ -8,6 +8,7 @@ export const FilterProvider = ({ children }) => {
     sortBy: "ascendant",
     search: "",
     from: "All",
+    type: "All",
   };
 
   const [filters, setFilters] = useState(() => {
