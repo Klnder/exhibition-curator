@@ -5,7 +5,7 @@ function ArtworkElement({ artwork, setArtworkClick }) {
     setArtworkClick(artwork);
   }
   return (
-    <div className="card card-compact min-w-[200px] w-[20%] bg-base-100 m-3 hover:scale-105 hover:shadow-md hover:shadow-secondary hover:cursor-pointer flex flex-col justify-between">
+    <div className="card card-compact min-w-[200px] w-[20%] max-w-[300px] bg-base-100 m-3 hover:scale-105 hover:shadow-md hover:shadow-secondary hover:cursor-pointer flex flex-col justify-between">
       <div onClick={handleClick} className="flex-grow">
         <figure className="rounded-md">
           <img src={artwork.image} alt={`Image of artwork ${artwork.title}`} className="w-40 h-40 rounded-md object-fill" />
