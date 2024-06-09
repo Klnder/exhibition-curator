@@ -17,34 +17,21 @@ function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
   const [types, setTypes] = useState([]);
 
-async function fetchData() {
-  try {
-    const dataCleveland = await getArtworksCleveland();
-    const dataChicago = await getArtworksArtInstituteOfChicago();
-
-    console.log("Data from Cleveland:", dataCleveland);
-    console.log("Data from Chicago:", dataChicago);
-
-    const updatedUser = { ...user, galleryCleveland: dataCleveland, galleryChicago: dataChicago };
-    const fullGallery = [...dataCleveland, ...dataChicago];
-
-    setTypes(getUniqueGalleryTypes(fullGallery));
-    setUser(updatedUser);
-
-    console.log("Updated User:", updatedUser);
-    console.log("Filters:", filters);
-
-    const galleryFilter = filterGallery(filters, updatedUser);
-
-    console.log("Filtered Gallery:", galleryFilter);
-
-    setGallery(galleryFilter);
-    setIsLoading(false);
-  } catch (error) {
-    console.error("Error fetching artworks:", error);
+  async function fetchData() {
+    try {
+      const dataCleveland = await getArtworksCleveland();
+      const dataChicago = await getArtworksArtInstituteOfChicago();
+      const updatedUser = { ...user, galleryCleveland: dataCleveland, galleryChicago: dataChicago };
+      const fullGallery = [...dataCleveland, ...dataChicago];
+      setTypes(getUniqueGalleryTypes(fullGallery));
+      setUser(updatedUser);
+      const galleryFilter = filterGallery(filters, updatedUser);
+      setGallery(galleryFilter);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error fetching artworks:", error);
+    }
   }
-}
-
 
   useEffect(() => {
     if (artworkClick !== "") {
