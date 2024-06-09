@@ -23,8 +23,7 @@ function HomePage() {
       const dataChicago = await getArtworksArtInstituteOfChicago();
       const updatedUser = { ...user, galleryCleveland: dataCleveland, galleryChicago: dataChicago };
       const fullGallery = [...dataCleveland, ...dataChicago];
-      console.log(fullGallery);
-      //setTypes(getUniqueGalleryTypes(fullGallery));
+      setTypes(getUniqueGalleryTypes(fullGallery));
       setUser(updatedUser);
       const galleryFilter = filterGallery(filters, updatedUser);
       setGallery(galleryFilter);

@@ -12,7 +12,10 @@ export function filterGallery(filters, user) {
   }
 
   if (filters.type !== "All") {
-    galleryFilter = galleryFilter.filter((artwork) => artwork.type.toLowerCase() === filters.type.toLowerCase());
+    galleryFilter = galleryFilter.filter((artwork) => {
+      console.log(artwork);
+      //artwork.type.toLowerCase() === filters.type.toLowerCase();
+    });
   }
 
   if (filters.sortBy === "ascendant") {
