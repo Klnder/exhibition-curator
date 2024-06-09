@@ -2,16 +2,23 @@
 
 ## About the project
 
-The aim of this project is to collect the list of artworks from differents Museum, and allow the user to search and filter through them, and create his own gallery.
+The aim of this project is to collect a list of artworks from different Museums, and allow the user to search and filter through them, and create his own gallery.
 
-For this project, I use artworks from 2 differents API :
+For this project, I use artwork from two different API :
 
 [Arts Institute of Chicago](https://api.artic.edu/docs/)  
 [Cleveland Museum of Art](https://openaccess-api.clevelandart.org/)
 
-The project is available here: [Go to Exhibition Creator](https://exhibitioncurator.netlify.app/home)
+The project is available here: [Go to Exhibition Curator](https://exhibitioncurator.netlify.app/home)
 
-The project have been developed using React, Tailwind, and DaisyUI.
+The project has been developed using React, Tailwind, and DaisyUI.
+
+This project can be further developed with this kind of functionality :
+
+- DB with users
+- Further filters
+- Further API
+- save and load filters in the URL
 
 ## Create your own version
 
