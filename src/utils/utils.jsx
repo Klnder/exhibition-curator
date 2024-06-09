@@ -11,9 +11,11 @@ export function filterGallery(filters, user) {
     galleryFilter = [...user.galleryChicago];
   }
 
-  if (filters.type !== "All") {
-    galleryFilter = galleryFilter.filter((artwork) => artwork.type?.toLowerCase() === filters.type.toLowerCase());
-  }
+if (filters.type !== "All") {
+  galleryFilter = galleryFilter.filter((artwork) => {
+    return artwork.type && typeof artwork.type === "string" && artwork.type.toLowerCase() === filters.type.toLowerCase();
+  });
+}
 
   if (filters.sortBy === "ascendant") {
     galleryFilter.sort((a, b) => {
