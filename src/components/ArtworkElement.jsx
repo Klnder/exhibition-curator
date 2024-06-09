@@ -8,7 +8,7 @@ function ArtworkElement({ artwork, setArtworkClick }) {
     <div className="card card-compact min-w-[200px] w-[20%] bg-base-100 m-3 hover:scale-105 hover:shadow-md hover:shadow-secondary hover:cursor-pointer flex flex-col justify-between">
       <div onClick={handleClick} className="flex-grow">
         <figure className="rounded-md">
-          <img src={artwork.image} alt={`Image of artwork ${artwork.title}`} className="w-48 h-48 rounded-md object-fill" />
+          <img src={artwork.image} alt={`Image of artwork ${artwork.title}`} className="w-40 h-40 rounded-md object-fill" />
         </figure>
         <div className="card-body">
           <h2 className="card-title text-md">{artwork.title.length > 40 ? `${artwork.title.slice(0, 40)}...` : artwork.title}</h2>
