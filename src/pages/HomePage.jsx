@@ -12,6 +12,7 @@ import Filters from "../components/Filters";
 function HomePage() {
   const { user, setUser } = useContext(UserContext);
   const { filters } = useContext(FilterContext);
+
   const [gallery, setGallery] = useState(user.gallery);
   const [artworkClick, setArtworkClick] = useState("");
   const [isLoading, setIsLoading] = useState(true);
