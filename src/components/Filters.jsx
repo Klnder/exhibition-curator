@@ -14,6 +14,7 @@ function Filters({ types }) {
       sortBy: "ascendant",
       search: "",
       from: "All",
+      type: "All",
     });
 
     setUser((prevUser) => ({
